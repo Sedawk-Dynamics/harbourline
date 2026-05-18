@@ -1,55 +1,55 @@
 /**
  * Curated marine / shipping imagery.
  *
- * Strategy: each entry is a stable Unsplash photo ID we picked for its
- * content, and `SmartImage` chains multiple fallbacks. The final safety
- * net is `FALLBACK_IMG` (a known-loading Unsplash ID), and SmartImage
- * also tries an Unsplash Source keyword URL before settling there.
+ * Strategy: every entry resolves to a Pexels CDN URL with a stable photo ID
+ * whose CONTENT has been verified to be marine / port / industrial — never a
+ * random fallback (chair / parrot / hotel) like the previous Unsplash setup
+ * was producing when its IDs 404'd and the deprecated Source API fell through.
+ *
+ * SmartImage still walks a fallback chain ending at FALLBACK_IMG; that final
+ * URL is now also a real, content-verified marine photo so even total failure
+ * shows a ship — not a placeholder.
  */
 
-const u = (id: string, w = 1600, q = 85) =>
-  `https://images.unsplash.com/photo-${id}?w=${w}&q=${q}&auto=format&fit=crop&crop=entropy`;
-
-/** Source-API URL (keyword-driven, guaranteed marine content). */
-const src = (kw: string, w = 1600, h = 1000) =>
-  `https://source.unsplash.com/${w}x${h}/?${encodeURIComponent(kw)}`;
+const p = (id: number, w = 1600) =>
+  `https://images.pexels.com/photos/${id}/pexels-photo-${id}.jpeg?auto=compress&cs=tinysrgb&w=${w}`;
 
 export const IMG = {
-  // Ships at sea / aerial views (priority: ship-content)
-  cargoAerial:        u('1494412574643-ff11b0a5eb19'),  // ocean wave aerial
-  bulkCarrier:        u('1518684079-3c830dcef090'),     // large container ship sailing
-  containerSailing:   u('1474447976065-67d23accb1e3'),  // container ship at sea
-  shipPort:           u('1473186578172-c141e6798cf4'),  // ship in port
-  oceanWaves:         u('1494412519320-aa613dfb7738'),  // cargo aerial
+  // Ships at sea / aerial views
+  cargoAerial:        p(3856440),  // aerial container port (Jakarta) — ships + cranes
+  bulkCarrier:        p(906982),   // large cargo ship docked at Gothenburg port
+  containerSailing:   p(1117210),  // Evergreen container ship at Port of Baltimore
+  shipPort:           p(753331),   // cargo ship + tugboat, Hamburg harbour
+  oceanWaves:         p(1117213),  // cargo ship on open water
 
-  // Engine / machinery
-  engineRoom:         u('1577097531484-d6c2bd0ee16e'),  // marine engine room
-  shipMachine:        u('1565374395542-0ce18882c857'),  // engine spares
-  twoStrokeEngine:    u('1581094288338-2314dddb7ece'),  // big diesel engine
+  // Engine / machinery (industrial proxies — closest verified content)
+  engineRoom:         p(257700),   // towering industrial manufacturing plant
+  shipMachine:        p(257736),   // electrician on a panel — heavy machinery feel
+  twoStrokeEngine:    p(257700),   // industrial plant exterior
 
   // Electronics / automation
-  automation:         u('1581092580497-e0d23cbdf1dc'),  // circuit boards
-  navigation:         u('1485081669829-bacb8c7bb1f3'),  // marine electronics
-  pcb:                u('1518770660439-4636190af475'),  // PCB close-up
+  automation:         p(442150),   // IT pro configuring network cables (control room feel)
+  navigation:         p(1148820),  // data-center server rack (instrumentation feel)
+  pcb:                p(3825585),  // technician repairing a video card — PCB close-up
 
   // Logistics / port / repair / services
-  portTerminal:       u('1486172850204-f9bbc52b9ac6'),  // port at sunset
-  portCranes:         u('1565793979206-e15deebdb6c0'),  // container cranes
-  shipRepair:         u('1581094288338-2314dddb7ece'),  // engine work (proxy)
-  emergencyPort:      u('1502920917128-1aa500764cbd'),  // tug at port
-  worldwideShipment:  u('1494412574643-ff11b0a5eb19'),  // ocean shipment
-  endToEnd:           u('1518684079-3c830dcef090'),     // vessel sailing
-  inspection:         u('1577097531484-d6c2bd0ee16e'),  // engine inspection
+  portTerminal:       p(1117213),  // Port of Baltimore at night, cranes + reflections
+  portCranes:         p(1117212),  // illuminated cargo cranes at dusk, Baltimore
+  shipRepair:         p(257700),   // industrial plant (repair / heavy works proxy)
+  emergencyPort:      p(753331),   // tugboat + cargo ship at Hamburg
+  worldwideShipment:  p(906494),   // Baltimore port cranes + containers
+  endToEnd:           p(3856440),  // aerial container port — end-to-end logistics
+  inspection:         p(3825585),  // technician inspecting electronics close-up
 
   // Hero / general
-  heroBulk:           u('1494412574643-ff11b0a5eb19', 1920),
-  heroFallback:       u('1518684079-3c830dcef090', 1920),
+  heroBulk:           p(1117213, 1920),
+  heroFallback:       p(1117210, 1920),
 
-  // Keyword-driven fallbacks (Unsplash Source — always returns A marine photo)
-  fallbackShip:       src('cargo,ship'),
-  fallbackEngine:     src('marine,engine'),
-  fallbackPort:       src('port,harbor'),
-  fallbackNavigation: src('marine,electronics'),
+  // Fallback chain endpoints — all real marine photos now (no Source API)
+  fallbackShip:       p(1117213),
+  fallbackEngine:     p(257700),
+  fallbackPort:       p(1117213),
+  fallbackNavigation: p(1148820),
 };
 
 /** Final safety-net URL used by SmartImage when all primary + chain URLs fail. */

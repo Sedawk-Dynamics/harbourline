@@ -38,7 +38,7 @@ const cards = [
 export default function WhyUs() {
   return (
     <PinnedScrubWhyUs
-      image="https://images.unsplash.com/photo-1473186578172-c141e6798cf4?w=1600&q=80&auto=format&fit=crop"
+      image="https://images.pexels.com/photos/906982/pexels-photo-906982.jpeg?auto=compress&cs=tinysrgb&w=1600"
       watermark="HARBOUR"
       intro={{
         eyebrow: 'Why Choose Us',

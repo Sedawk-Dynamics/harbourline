@@ -1,6 +1,8 @@
-import { useMemo } from 'react';
+import { useMemo, useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useReducedMotion } from '../animations/useReducedMotion';
+
+const STATUS_PHRASES = ['Casting off', 'Charting course', 'All hands on deck'];
 
 type Bubble = {
   id: number;
@@ -20,6 +22,19 @@ type Ray = {
 
 export default function Preloader({ isLoading }: { isLoading: boolean }) {
   const reduced = useReducedMotion();
+
+  // Crossfade through 3 micro status phrases over the dive — gives the
+  // loader a sense of actionable progression instead of feeling idle.
+  const [phase, setPhase] = useState(0);
+  useEffect(() => {
+    if (!isLoading) return;
+    const t1 = window.setTimeout(() => setPhase(1), 1300);
+    const t2 = window.setTimeout(() => setPhase(2), 2500);
+    return () => {
+      window.clearTimeout(t1);
+      window.clearTimeout(t2);
+    };
+  }, [isLoading]);
 
   // 48 bubbles total, in 2 depth layers — back layer is smaller / dimmer, front layer is larger / brighter.
   const bubbles = useMemo<Bubble[]>(() => {
@@ -76,6 +91,23 @@ export default function Preloader({ isLoading }: { isLoading: boolean }) {
               d="M0,32L80,37.3C160,43,320,53,480,53.3C640,53,800,43,960,42.7C1120,43,1280,53,1360,58.7L1440,64L1440,0L0,0Z"
             />
           </svg>
+
+          {/* Cinematic letterbox bars — slide in, then retract on exit for a
+              widescreen "frame opening" moment. */}
+          <motion.div
+            initial={{ y: '-100%' }}
+            animate={{ y: 0 }}
+            exit={{ y: '-100%' }}
+            transition={{ duration: 0.7, ease: [0.7, 0, 0.3, 1] }}
+            className="absolute top-0 inset-x-0 h-[10vh] sm:h-[12vh] bg-black z-30 pointer-events-none"
+          />
+          <motion.div
+            initial={{ y: '100%' }}
+            animate={{ y: 0 }}
+            exit={{ y: '100%' }}
+            transition={{ duration: 0.7, ease: [0.7, 0, 0.3, 1] }}
+            className="absolute bottom-0 inset-x-0 h-[10vh] sm:h-[12vh] bg-black z-30 pointer-events-none"
+          />
 
           {/* Sun-shafts piercing down through the water */}
           {!reduced && (
@@ -172,52 +204,73 @@ export default function Preloader({ isLoading }: { isLoading: boolean }) {
             transition={{ delay: 1.6, duration: 0.9, ease: [0.2, 0.7, 0.3, 1] }}
             className="relative z-10 flex flex-col items-center gap-6 px-6 text-center"
           >
-            {/* Spinning ring + brand letter */}
-            <div className="relative w-24 h-24">
-              <svg viewBox="0 0 100 100" className="w-full h-full">
-                <circle
-                  cx="50" cy="50" r="46"
-                  fill="none"
-                  stroke="rgba(255,255,255,0.25)"
-                  strokeWidth="2"
-                />
-                <motion.circle
-                  cx="50" cy="50" r="46"
-                  fill="none"
-                  stroke="#FFFFFF"
-                  strokeWidth="3"
-                  strokeLinecap="round"
-                  strokeDasharray="289"
-                  initial={{ strokeDashoffset: 289 }}
-                  animate={{ strokeDashoffset: 0 }}
-                  transition={{ duration: 1.4, ease: 'easeInOut', delay: 1.8 }}
-                  transform="rotate(-90 50 50)"
-                />
-              </svg>
-              <span className="absolute inset-0 flex items-center justify-center text-white text-3xl font-extrabold drop-shadow-[0_2px_10px_rgba(0,0,0,0.5)]">
-                H
-              </span>
-            </div>
+            {/* Slow-rotating dashed compass ring orbiting behind the panel */}
+            {!reduced && (
+              <motion.span
+                aria-hidden
+                initial={{ opacity: 0, rotate: 0 }}
+                animate={{ opacity: 0.35, rotate: 360 }}
+                transition={{
+                  opacity: { delay: 2.0, duration: 0.8 },
+                  rotate: { duration: 28, repeat: Infinity, ease: 'linear' },
+                }}
+                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[22rem] h-[22rem] sm:w-[26rem] sm:h-[26rem] rounded-full border border-dashed border-white/30 pointer-events-none"
+              />
+            )}
 
-            {/* Word-mark per-letter rise */}
-            <div className="flex gap-1.5 overflow-hidden">
-              {'HARBOURLINE'.split('').map((ch, i) => (
+            {/* Logo panel with breathing outer glow + one-time shimmer sheen */}
+            <motion.div
+              animate={
+                reduced
+                  ? undefined
+                  : {
+                      boxShadow: [
+                        '0 20px 60px -15px rgba(0,0,0,0.55), 0 0 0 0 rgba(79,180,248,0)',
+                        '0 20px 60px -15px rgba(0,0,0,0.55), 0 0 70px 10px rgba(79,180,248,0.45)',
+                        '0 20px 60px -15px rgba(0,0,0,0.55), 0 0 0 0 rgba(79,180,248,0)',
+                      ],
+                    }
+              }
+              transition={{ delay: 2.0, duration: 3.0, repeat: Infinity, ease: 'easeInOut' }}
+              className="relative overflow-hidden rounded-2xl bg-white/95 p-5 sm:p-7 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.55)] backdrop-blur-sm"
+            >
+              <img
+                src="/logo.png"
+                alt="Harbourline Ship Management"
+                className="relative z-10 w-44 h-44 sm:w-56 sm:h-56 object-contain"
+              />
+              {/* Shimmer sheen — sweeps once after the logo settles */}
+              {!reduced && (
                 <motion.span
-                  key={i}
-                  initial={{ y: 30, opacity: 0 }}
+                  aria-hidden
+                  initial={{ x: '-120%' }}
+                  animate={{ x: '220%' }}
+                  transition={{ delay: 2.4, duration: 1.4, ease: [0.4, 0, 0.2, 1] }}
+                  className="absolute inset-y-0 -left-1/3 w-1/3 -skew-x-12 bg-linear-to-r from-transparent via-white/70 to-transparent pointer-events-none"
+                />
+              )}
+            </motion.div>
+
+            {/* Cycling micro-status — gives a sense of progress */}
+            <div className="h-4 flex items-center justify-center overflow-hidden">
+              <AnimatePresence mode="wait">
+                <motion.span
+                  key={phase}
+                  initial={{ y: 12, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
-                  transition={{ delay: 2.0 + i * 0.05, duration: 0.6, ease: [0.2, 0.7, 0.3, 1] }}
-                  className="text-white text-sm sm:text-base tracking-[6px] font-extrabold drop-shadow-[0_2px_6px_rgba(0,0,0,0.55)]"
+                  exit={{ y: -12, opacity: 0 }}
+                  transition={{ duration: 0.45, ease: [0.2, 0.7, 0.3, 1] }}
+                  className="text-[color:var(--color-brand-light)] text-[10px] sm:text-[11px] tracking-[5px] uppercase font-semibold"
                 >
-                  {ch}
+                  {STATUS_PHRASES[phase]}
                 </motion.span>
-              ))}
+              </AnimatePresence>
             </div>
 
             <motion.span
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 2.8, duration: 0.5 }}
+              transition={{ delay: 2.4, duration: 0.5 }}
               className="text-white/85 text-[11px] tracking-[4px] uppercase"
             >
               Diving into Marine Excellence
@@ -226,6 +279,17 @@ export default function Preloader({ isLoading }: { isLoading: boolean }) {
 
           {/* Soft vignette */}
           <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(ellipse_at_center,transparent_50%,rgba(0,0,0,0.55)_100%)]" />
+
+          {/* Progress hairline — sits above the bottom letterbox, fills over
+              the dive so the loader never feels idle. */}
+          <div className="absolute left-0 right-0 bottom-[10vh] sm:bottom-[12vh] h-[2px] bg-white/10 z-40 overflow-hidden">
+            <motion.div
+              initial={{ width: '0%' }}
+              animate={{ width: '100%' }}
+              transition={{ duration: 3.4, ease: [0.4, 0, 0.2, 1] }}
+              className="h-full bg-gradient-to-r from-[color:var(--color-brand-light)] via-white to-[color:var(--color-brand)] shadow-[0_0_12px_rgba(79,180,248,0.7)]"
+            />
+          </div>
         </motion.div>
       )}
     </AnimatePresence>

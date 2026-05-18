@@ -84,10 +84,11 @@ export default function Navbar() {
       >
         <div className="max-w-[1400px] mx-auto px-6 py-4 flex items-center justify-between">
           <a href="/" onClick={(e) => { e.preventDefault(); go('/'); }} className="flex items-center gap-3 group">
-            <div className="relative w-12 h-12 rounded-full bg-gradient-to-br from-[color:var(--color-brand-dark)] to-[color:var(--color-brand)] flex items-center justify-center shadow-[0_0_30px_-5px_rgba(1,142,222,0.5)]">
-              <span className="font-heading text-white font-extrabold text-lg">H</span>
-              <span className="absolute inset-0 rounded-full border-2 border-[color:var(--color-brand)]/30 animate-[spinSlow_18s_linear_infinite]" />
-            </div>
+            <img
+              src="/logo.png"
+              alt="Harbourline Ship Management"
+              className="w-12 h-12 object-contain drop-shadow-[0_0_18px_rgba(1,142,222,0.35)]"
+            />
             <div className="flex flex-col leading-tight">
               <span className="font-heading text-lg sm:text-xl font-extrabold tracking-tight">
                 HARBOUR<span className="text-[color:var(--color-brand)]">LINE</span>
