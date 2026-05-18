@@ -1,0 +1,10 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "installCommand": "cd Harbourline-Ship-Management-Private-Limited/website && npm install --no-audit --no-fund",
+  "buildCommand": "cd Harbourline-Ship-Management-Private-Limited/website && npm run build",
+  "outputDirectory": "Harbourline-Ship-Management-Private-Limited/website/dist",
+  "framework": null,
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
+}
