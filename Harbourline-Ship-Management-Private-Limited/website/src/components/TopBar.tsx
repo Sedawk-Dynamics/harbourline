@@ -7,17 +7,17 @@ export default function TopBar() {
         <div className="flex items-center gap-8 flex-wrap">
           <span className="flex items-center gap-2">
             <FaMapMarkerAlt className="text-[color:var(--color-brand)]" />
-            Alang, Gujarat – India
+            Bhavnagar, Gujarat &mdash; India
           </span>
           <span className="text-line">|</span>
           <a href="tel:+919825645515" className="flex items-center gap-2 hover:text-[color:var(--color-brand-light)] transition-colors">
             <FaPhoneAlt className="text-[color:var(--color-brand)]" />
-            +91 9825 645515
+            +91 98256 45515
           </a>
           <span className="text-line">|</span>
-          <a href="mailto:info@harbourline.com" className="flex items-center gap-2 hover:text-[color:var(--color-brand-light)] transition-colors">
+          <a href="mailto:harbourlineshipmanagement@gmail.com" className="flex items-center gap-2 hover:text-[color:var(--color-brand-light)] transition-colors">
             <FaEnvelope className="text-[color:var(--color-brand)]" />
-            info@harbourline.com
+            harbourlineshipmanagement@gmail.com
           </a>
         </div>
         <div className="flex items-center gap-3">

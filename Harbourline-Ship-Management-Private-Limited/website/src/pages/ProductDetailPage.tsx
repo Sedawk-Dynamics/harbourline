@@ -80,7 +80,7 @@ export default function ProductDetailPage() {
                   Request a Quote <FaArrowRight />
                 </Link>
                 <a href="tel:+919825645515" className="cta-ghost">
-                  Call +91 9825 645515
+                  Call +91 98256 45515
                 </a>
               </div>
             </Reveal>

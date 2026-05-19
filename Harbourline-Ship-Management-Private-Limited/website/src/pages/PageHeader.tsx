@@ -29,9 +29,9 @@ export default function PageHeader({ eyebrow, title, crumbs, bgImage, bgArt, bgF
         ) : bgImage ? (
           <SmartImage
             src={bgImage}
-            fallback={bgFallback ?? [IMG.engineRoom, IMG.containerSailing]}
+            fallback={bgFallback ?? [IMG.fallbackPort, IMG.fallbackShip]}
             alt=""
-            className="absolute inset-0 w-full h-full object-cover"
+            className="absolute inset-0 w-full h-full object-cover bg-zoom"
             aria-hidden
           />
         ) : (
@@ -48,6 +48,17 @@ export default function PageHeader({ eyebrow, title, crumbs, bgImage, bgArt, bgF
       {/* Brand colour wash */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_30%_40%,rgba(1,142,222,0.30),transparent_60%)] pointer-events-none z-[1]" />
       <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent,rgba(11,15,20,0.6))] pointer-events-none z-[1]" />
+
+      {/* Decorative orbiting marker — sets the premium tone */}
+      <motion.div
+        aria-hidden
+        initial={{ rotate: 0 }}
+        animate={{ rotate: 360 }}
+        transition={{ duration: 80, repeat: Infinity, ease: 'linear' }}
+        className="absolute right-6 lg:right-16 top-1/2 -translate-y-1/2 w-72 h-72 rounded-full border border-[color:var(--color-brand-light)]/15 pointer-events-none z-[1] hidden md:block"
+      >
+        <span className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-[color:var(--color-brand-light)] shadow-[0_0_18px_rgba(79,180,248,0.75)]" />
+      </motion.div>
 
       <div className="relative z-10 max-w-[1400px] mx-auto px-6 lg:px-10">
         {crumbs && crumbs.length > 0 && (

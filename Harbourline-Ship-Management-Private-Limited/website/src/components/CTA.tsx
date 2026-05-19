@@ -33,7 +33,7 @@ export default function CTA() {
     <section ref={ref} className="dark-zone relative section-pad text-white overflow-hidden">
       <motion.div className="absolute inset-0 z-0" style={{ y: bgY }}>
         <SmartImage
-          src={IMG.bulkCarrier}
+          src={IMG.ctaBg}
           fallback={[IMG.cargoAerial, IMG.containerSailing]}
           alt=""
           className="w-full h-[120%] object-cover"
@@ -55,8 +55,30 @@ export default function CTA() {
             animate={{ y: [0, 15, 0] }}
             transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
           />
+          {/* Decorative orbit ring (mid-right) */}
+          <motion.div
+            className="absolute top-1/2 right-10 -translate-y-1/2 w-72 h-72 rounded-full border border-[color:var(--color-brand-light)]/15 z-10 pointer-events-none"
+            animate={{ rotate: -360 }}
+            transition={{ duration: 65, repeat: Infinity, ease: 'linear' }}
+          >
+            <span className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2.5 h-2.5 rounded-full bg-[color:var(--color-brand-light)] shadow-[0_0_18px_rgba(79,180,248,0.8)]" />
+          </motion.div>
         </>
       )}
+
+      {/* Animated wave divider at the bottom */}
+      <div className="wave-divider bottom-0 z-10 opacity-60">
+        <svg viewBox="0 0 1440 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M0,30 C240,55 480,5 720,30 C960,55 1200,5 1440,30 L1440,60 L0,60 Z"
+            fill="rgba(1,142,222,0.35)"
+          />
+          <path
+            d="M0,40 C240,15 480,55 720,40 C960,15 1200,55 1440,40 L1440,60 L0,60 Z"
+            fill="rgba(11,15,20,0.6)"
+          />
+        </svg>
+      </div>
 
       <div className="relative z-20 max-w-[1400px] mx-auto px-6 lg:px-10 text-center">
         <Reveal variant="up">
@@ -64,13 +86,14 @@ export default function CTA() {
         </Reveal>
         <SplitText
           as="h2"
-          text="Need Marine Spares Delivered Worldwide?"
+          text="Vessel Needs Spares, Repair or Port Support?"
           className="h-display text-3xl sm:text-5xl lg:text-6xl mb-6 max-w-3xl mx-auto block"
         />
         <Reveal variant="up" delay={0.3}>
           <p className="text-mute-2 max-w-2xl mx-auto mb-10 text-base sm:text-lg">
-            Send us your enquiry and our team will respond within hours with quotes, availability and
-            dispatch timelines.
+            Send the engine make, the part description and the port of delivery. Our marine team
+            confirms availability, quotes and dispatch timeline within the same working day &mdash;
+            and faster when the requirement is urgent.
           </p>
         </Reveal>
         <Reveal variant="up" delay={0.5}>
@@ -80,7 +103,7 @@ export default function CTA() {
               <FaArrowRight className="group-hover:translate-x-1 transition-transform" />
             </MagneticButton>
             <MagneticButton as="a" href="tel:+919825645515" className="btn-square is-ghost">
-              Call +91 9825 645515
+              Call +91 98256 45515
             </MagneticButton>
           </div>
         </Reveal>

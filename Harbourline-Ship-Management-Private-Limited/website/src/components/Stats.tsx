@@ -3,13 +3,13 @@ import { FaCircle } from 'react-icons/fa6';
 import Marquee from '../animations/Marquee';
 
 const items: ReadonlyArray<{ type: 'text' | 'dot' | 'phone' | 'email'; value?: string }> = [
-  { type: 'text', value: 'Navigating Excellence Across Oceans' },
+  { type: 'text', value: 'Navigating Excellence at Sea' },
   { type: 'dot' },
-  { type: 'text', value: 'Your Trusted Marine Partner Worldwide' },
+  { type: 'text', value: 'Ship Management · Repairs · Spares Supplier' },
   { type: 'dot' },
-  { type: 'text', value: 'Fast Worldwide Delivery' },
-  { type: 'phone', value: '+91 9825 645515' },
-  { type: 'email', value: 'info@harbourline.com' },
+  { type: 'text', value: 'Worldwide Dispatch From Bhavnagar, India' },
+  { type: 'phone', value: '+91 98256 45515' },
+  { type: 'email', value: 'harbourlineshipmanagement@gmail.com' },
 ];
 
 export default function MarqueeStrip() {
@@ -41,7 +41,7 @@ export default function MarqueeStrip() {
   );
 
   return (
-    <section className="dark-zone bg-[color:var(--color-brand)] text-white border-y border-[color:var(--color-brand-dark)]">
+    <section className="dark-zone marquee-glow bg-[color:var(--color-brand)] text-white border-y border-[color:var(--color-brand-dark)] relative">
       <Marquee speedSeconds={28} fade={false} className="py-4">
         {block}
       </Marquee>

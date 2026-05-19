@@ -17,7 +17,7 @@ export default function LegalPage({ title, intro, sections, crumbLabel }: Props)
         eyebrow="Legal"
         title={title}
         crumbs={[{ label: 'Home', to: '/' }, { label: crumbLabel }]}
-        bgImage={IMG.shipPort}
+        bgImage={IMG.legalHeader}
       />
 
       <section className="surface section-pad">
@@ -88,15 +88,15 @@ export function PrivacyPage() {
         {
           heading: 'Your Rights',
           body: [
-            'You may at any time request a copy of the personal information we hold about you, request its correction or request its deletion. Send all such requests to info@harbourline.com and we will respond within 30 days.',
+            'You may at any time request a copy of the personal information we hold about you, request its correction or request its deletion. Send all such requests to harbourlineshipmanagement@gmail.com and we will respond within 30 days.',
           ],
         },
         {
           heading: 'Contact',
           body: [
             'Harbourline Ship Management Pvt. Ltd.',
-            'R/s No. 78/6, Khata No. 125, Opposite Shree Ram Oxygen, Alang Road, Bhavnagar, Gujarat — 364150, India',
-            'Email: info@harbourline.com · Phone: +91 9825 645515',
+            '240/A Sagar Complex, Jashonath Chowk, Near Moti Baug, Bhavnagar, Gujarat — 364001, India',
+            'Email: harbourlineshipmanagement@gmail.com · Phone: +91 98256 45515',
           ],
         },
       ]}

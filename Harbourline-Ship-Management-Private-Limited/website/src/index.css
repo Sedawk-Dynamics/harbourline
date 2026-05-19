@@ -545,6 +545,157 @@ html.light .btn-square.is-ghost:hover { color: #fff; }
   border-radius: 999px !important;
 }
 
+/* ===================================================== */
+/* PREMIUM ANIMATION LAYER                                */
+/* ===================================================== */
+
+/* Slow ken-burns zoom for hero/background imagery */
+@keyframes kenBurns {
+  0%   { transform: scale(1.0)  translate(0, 0); }
+  50%  { transform: scale(1.08) translate(-1%, -1%); }
+  100% { transform: scale(1.0)  translate(0, 0); }
+}
+.kenburns { animation: kenBurns 22s ease-in-out infinite; }
+
+/* Brand-coloured aura that softly pulses around a node */
+@keyframes auraPulse {
+  0%, 100% {
+    box-shadow:
+      0 0 0 0 rgba(1, 142, 222, 0.45),
+      0 0 30px 0 rgba(1, 142, 222, 0.10);
+  }
+  50% {
+    box-shadow:
+      0 0 0 14px rgba(1, 142, 222, 0),
+      0 0 60px 12px rgba(1, 142, 222, 0.18);
+  }
+}
+.aura-brand { animation: auraPulse 3.6s ease-in-out infinite; }
+
+/* Sweeping shimmer (one-shot or on hover) — a diagonal sheen */
+@keyframes shimmerSweep {
+  0%   { transform: translateX(-150%) skewX(-18deg); opacity: 0; }
+  10%  { opacity: 0.55; }
+  60%  { opacity: 0.55; }
+  100% { transform: translateX(250%)  skewX(-18deg); opacity: 0; }
+}
+.shimmer-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+.shimmer-overlay::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 40%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.18), transparent);
+  animation: shimmerSweep 6s ease-in-out infinite;
+}
+
+/* Spotlight that follows on hover for cards */
+.spot-card {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+.spot-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(220px circle at var(--mx, 50%) var(--my, 50%),
+    rgba(79, 180, 248, 0.18) 0%,
+    rgba(79, 180, 248, 0) 60%);
+  opacity: 0;
+  transition: opacity .35s ease;
+  pointer-events: none;
+  z-index: 1;
+}
+.spot-card:hover::after { opacity: 1; }
+
+/* Premium chip / brand tile lift */
+.lift-tile {
+  transition: transform .4s cubic-bezier(.2,.7,.3,1), box-shadow .4s ease, border-color .4s ease;
+}
+.lift-tile:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 22px 50px -18px rgba(1,142,222,0.45);
+  border-color: rgba(1,142,222,0.5);
+}
+
+/* Continuous ambient drift for decorative SVG/marks */
+@keyframes ambientDrift {
+  0%   { transform: translate(0,0) rotate(0deg); }
+  50%  { transform: translate(8px,-12px) rotate(2deg); }
+  100% { transform: translate(0,0) rotate(0deg); }
+}
+.ambient-drift { animation: ambientDrift 12s ease-in-out infinite; }
+
+/* Marquee edge glow strip */
+.marquee-glow {
+  position: relative;
+}
+.marquee-glow::before,
+.marquee-glow::after {
+  content: '';
+  position: absolute;
+  inset-inline: 0;
+  height: 2px;
+  background: linear-gradient(90deg,
+    transparent,
+    rgba(79,180,248,0.55) 50%,
+    transparent);
+  filter: blur(0.5px);
+}
+.marquee-glow::before { top: 0; }
+.marquee-glow::after  { bottom: 0; }
+
+/* CTA wave divider */
+@keyframes waveSlide {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.wave-divider {
+  position: absolute;
+  inset-inline: 0;
+  height: 60px;
+  pointer-events: none;
+  overflow: hidden;
+}
+.wave-divider svg {
+  display: block;
+  width: 200%;
+  height: 100%;
+  animation: waveSlide 18s linear infinite;
+}
+
+/* Image — gentle continuous zoom for hero/header bg */
+.bg-zoom { animation: kenBurns 28s ease-in-out infinite; transform-origin: center; }
+
+/* Anchor SVG rotate (decorative) */
+.spin-slow { animation: spinSlow 80s linear infinite; }
+.spin-rev  { animation: spinSlow 60s linear infinite reverse; }
+
+/* Stat tile glow border */
+.stat-glow {
+  position: relative;
+}
+.stat-glow::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: linear-gradient(135deg, rgba(1,142,222,0.0), rgba(1,142,222,0.45), rgba(1,142,222,0.0));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  padding: 1px;
+  opacity: 0.6;
+  pointer-events: none;
+}
+
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
@@ -559,7 +710,15 @@ html.light .btn-square.is-ghost:hover { color: #fff; }
   .scroll-cue::after,
   .shimmer-text,
   .particle,
-  .glow-orb {
+  .glow-orb,
+  .kenburns,
+  .aura-brand,
+  .shimmer-overlay::before,
+  .ambient-drift,
+  .wave-divider svg,
+  .bg-zoom,
+  .spin-slow,
+  .spin-rev {
     animation: none !important;
   }
   .reveal-mask, .reveal-mask-v { clip-path: none !important; }

@@ -15,35 +15,35 @@ import { IMG } from '../lib/images';
 const testimonials = [
   {
     quote:
-      'Best product with satisfactory price. If you have any query they give you a quick response and the service is also best. Harbourline is a reliable marine spares partner in Bhavnagar.',
-    name: 'Ajay Baria',
-    company: 'Marine Engineer',
-    image: IMG.oceanWaves,
-    fallback: [IMG.bulkCarrier, IMG.cargoAerial],
+      'Harbourline confirmed availability inside the hour and shared photographs of the actual spare before we issued the PO. That kind of transparency is rare and exactly what an engine room needs.',
+    name: 'Chief Engineer',
+    company: 'Bulk Carrier Operator, Greece',
+    image: IMG.testimonial1,
+    fallback: [IMG.fallbackShip, IMG.cargoAerial],
   },
   {
     quote:
-      'The availability of high-quality reconditioned marine spares at Harbourline is impressive. Their technical support is always reliable and the documentation is on point.',
+      'Their reconditioned 2-stroke main engine spares came with measurement records and a clear inspection sign-off. The parts performed as expected onboard with no surprises during fitment.',
     name: 'Technical Superintendent',
-    company: 'International Shipping Company',
-    image: IMG.containerSailing,
-    fallback: [IMG.shipPort, IMG.cargoAerial],
+    company: 'International Shipping Co., Singapore',
+    image: IMG.testimonial2,
+    fallback: [IMG.containerSailing, IMG.oceanWaves],
   },
   {
     quote:
-      'During emergency requirements, Harbourline responded swiftly and supplied critical machinery parts on time. Truly dependable service.',
+      'Emergency call placed late evening, components inspected, packed and on the road before midnight, delivered to the gangway by sunrise. Harbourline understands what a sailing deadline actually means.',
     name: 'Fleet Manager',
-    company: 'Global Ship Management Firm',
-    image: IMG.shipPort,
-    fallback: [IMG.portTerminal, IMG.bulkCarrier],
+    company: 'Tanker Fleet, Gulf Region',
+    image: IMG.testimonial3,
+    fallback: [IMG.shipPort, IMG.fallbackPort],
   },
   {
     quote:
-      'Documentation, dispatch and customs handling were seamless. Parts arrived at port within 72 hours — exactly when our vessel needed them.',
+      'Documentation, customs paperwork and port-agent coordination were handled end-to-end. The radar PCB and bridge spares cleared customs and reached the vessel inside our planned port stay.',
     name: 'Purchasing Head',
-    company: 'Dry Bulk Shipping Co.',
-    image: IMG.bulkCarrier,
-    fallback: [IMG.cargoAerial, IMG.containerSailing],
+    company: 'Dry Bulk Shipping Co., Mumbai',
+    image: IMG.testimonial4,
+    fallback: [IMG.bulkCarrier, IMG.fallbackShip],
   },
 ];
 

@@ -14,14 +14,15 @@ export default function ProductsPage() {
         eyebrow="Our Catalogue"
         title="Marine Machinery & Spare Parts"
         crumbs={[{ label: 'Home', to: '/' }, { label: 'Products' }]}
-        bgImage={IMG.engineRoom}
+        bgImage={IMG.productsHeader}
       />
 
       <section className="surface section-pad">
         <div className="max-w-[1400px] mx-auto px-6 lg:px-10">
           <p className="text-mute-2 max-w-2xl mb-12 text-base sm:text-lg">
-            Browse our extensive catalogue of brand-new and reconditioned marine spare parts —
-            every item QC-checked and ready for global shipment.
+            Main engine, auxiliary engine, automation, navigation and radar spares &mdash;
+            sourced through certified suppliers and the Alang ship recycling yard, inspected
+            in our workshop and dispatched with the documentation your vessel actually needs.
           </p>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">

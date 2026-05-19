@@ -237,8 +237,8 @@ export default function Navbar() {
                 transition={{ delay: 0.5 }}
                 className="mt-12 flex flex-col items-center gap-2 text-mute text-sm"
               >
-                <span>+91 9825 645515 • info@harbourline.com</span>
-                <span>Alang, Gujarat – India</span>
+                <span>+91 98256 45515 &bull; harbourlineshipmanagement@gmail.com</span>
+                <span>Bhavnagar, Gujarat &mdash; India</span>
               </motion.div>
             </div>
           </motion.div>

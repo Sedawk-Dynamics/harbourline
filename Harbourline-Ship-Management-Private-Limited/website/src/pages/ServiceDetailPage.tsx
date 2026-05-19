@@ -4,6 +4,7 @@ import { FaArrowRight, FaCheck } from 'react-icons/fa6';
 import PageShell from './PageShell';
 import PageHeader from './PageHeader';
 import ServiceArt from '../components/ServiceArt';
+import SmartImage from '../components/SmartImage';
 import Reveal from '../animations/Reveal';
 import { findService, SERVICES } from '../data/services';
 
@@ -23,20 +24,47 @@ export default function ServiceDetailPage() {
           { label: 'Services', to: '/services' },
           { label: service.title },
         ]}
-        bgArt={<ServiceArt slug={service.slug} />}
+        bgImage={service.image}
+        bgFallback={service.fallback}
       />
 
       <section className="surface section-pad">
         <div className="max-w-[1400px] mx-auto px-6 lg:px-10 grid lg:grid-cols-5 gap-10">
-          {/* Image */}
+          {/* Image — premium photo + subtle decorative SVG accent */}
           <div className="lg:col-span-2">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="img-overlay relative rounded-2xl overflow-hidden aspect-[4/5] border border-line"
+              className="img-overlay card-ring relative rounded-2xl overflow-hidden aspect-[4/5] border border-line group"
             >
-              <ServiceArt slug={service.slug} />
+              <SmartImage
+                src={service.image}
+                fallback={service.fallback}
+                alt={service.title}
+                className="absolute inset-0 w-full h-full object-cover bg-zoom transition-transform duration-700"
+                loading="lazy"
+              />
+              {/* Brand gradient overlay for a premium tonal wash */}
+              <div className="absolute inset-0 bg-[linear-gradient(160deg,rgba(11,15,20,0.55)_0%,rgba(1,142,222,0.35)_60%,rgba(11,15,20,0.75)_100%)] pointer-events-none" />
+              {/* Service number marker */}
+              <div className="absolute top-5 left-5 z-10 flex items-center gap-3">
+                <span className="numeric-fill text-2xl drop-shadow">{service.n}</span>
+                <span className="text-white/85 text-[10px] tracking-[3px] uppercase">Service</span>
+              </div>
+              {/* Floating SVG accent ring — anchored bottom-right, a quiet nod to the icon-art */}
+              <motion.div
+                aria-hidden
+                animate={{ rotate: 360 }}
+                transition={{ duration: 60, repeat: Infinity, ease: 'linear' }}
+                className="absolute -bottom-12 -right-12 w-44 h-44 rounded-full border border-[color:var(--color-brand-light)]/30 pointer-events-none"
+              >
+                <span className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-[color:var(--color-brand-light)] shadow-[0_0_18px_rgba(79,180,248,0.8)]" />
+              </motion.div>
+              {/* Tiny iconography badge from ServiceArt (just the gradient icon swatch) */}
+              <div className="absolute bottom-5 left-5 z-10 w-14 h-14 rounded-xl overflow-hidden border border-white/15 shadow-xl">
+                <ServiceArt slug={service.slug} />
+              </div>
             </motion.div>
           </div>
 
@@ -70,7 +98,7 @@ export default function ServiceDetailPage() {
                   Request a Quote <FaArrowRight />
                 </Link>
                 <a href="tel:+919825645515" className="cta-ghost">
-                  Call +91 9825 645515
+                  Call +91 98256 45515
                 </a>
               </div>
             </Reveal>

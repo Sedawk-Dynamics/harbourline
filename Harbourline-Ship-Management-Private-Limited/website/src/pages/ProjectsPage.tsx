@@ -12,7 +12,7 @@ export default function ProjectsPage() {
         eyebrow="Case Studies"
         title="Recent Projects"
         crumbs={[{ label: 'Home', to: '/' }, { label: 'Projects' }]}
-        bgImage={IMG.portCranes}
+        bgImage={IMG.projectsHeader}
       />
 
       <section className="surface section-pad">

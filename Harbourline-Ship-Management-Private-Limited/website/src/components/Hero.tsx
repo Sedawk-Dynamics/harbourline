@@ -76,7 +76,7 @@ export default function Hero() {
           src={POSTER}
           fallback={[IMG.heroFallback, IMG.bulkCarrier]}
           alt="Container cargo ship hauling bulk freight across the ocean"
-          className="absolute inset-0 w-full h-[115%] object-cover"
+          className="absolute inset-0 w-full h-[115%] object-cover bg-zoom"
           loading="eager"
           fetchPriority="high"
         />
@@ -169,7 +169,7 @@ export default function Hero() {
         <Reveal variant="left" duration={0.7}>
           <div className="flex items-center gap-3 text-mute-2 mb-6">
             <span className="h-px w-10 bg-[color:var(--color-brand)]" />
-            <span className="text-xs sm:text-sm tracking-[4px] uppercase">Welcome To</span>
+            <span className="text-xs sm:text-sm tracking-[4px] uppercase">Navigating Excellence at Sea</span>
           </div>
         </Reveal>
 
@@ -183,19 +183,25 @@ export default function Hero() {
         <SplitText
           as="h1"
           text="Ship Management"
-          className="h-display text-[color:var(--color-brand-light)] text-[2.5rem] sm:text-5xl md:text-6xl lg:text-[5.5rem] xl:text-[6.5rem] block mb-7"
+          className="h-display text-[color:var(--color-brand-light)] text-[2.5rem] sm:text-5xl md:text-6xl lg:text-[5.5rem] xl:text-[6.5rem] block mb-5"
           staggerMs={28}
           delayMs={400}
           trigger="mount"
         />
 
+        <Reveal variant="up" delay={0.9}>
+          <p className="max-w-2xl text-white/90 text-sm sm:text-base font-semibold tracking-[3px] uppercase mb-6">
+            Ship Management · Marine Repairs · Spares Supplier
+          </p>
+        </Reveal>
+
         <Reveal variant="up" delay={1}>
           <p className="max-w-2xl text-mute-2 text-base sm:text-lg leading-relaxed mb-10">
-            We are happy to welcome you to Harbourline Ship Management, one of the leading stockists,
-            traders & exporters of ship spares and machineries{' '}
-            <span className="text-white font-semibold">Since 1998</span>. Our activities are based on
-            trading of brand new as well as used-reconditioned marine spare parts and machinery,
-            directly procured from ships under demolition at Alang.
+            Where maritime reliability meets global service excellence. Harbourline Ship Management
+            delivers ship management, marine repair services and worldwide supply of main engine,
+            auxiliary engine and automation spares — all backed by{' '}
+            <span className="text-white font-semibold">technically sound, dependable service</span>{' '}
+            and components inspected before they ever leave our store.
           </p>
         </Reveal>
 

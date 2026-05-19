@@ -56,7 +56,7 @@ export default function Brands() {
         >
           {brands.map((b, i) => (
             <SwiperSlide key={`${b}-${i}`} className="!h-auto">
-              <div className="aspect-[5/3] surface-2 border border-line rounded-xl flex items-center justify-center text-mute-2 hover:text-[color:var(--color-brand-light)] hover:border-[color:var(--color-brand)] hover:-translate-y-1 transition-all duration-300 group">
+              <div className="aspect-[5/3] surface-2 border border-line rounded-xl flex items-center justify-center text-mute-2 hover:text-[color:var(--color-brand-light)] transition-colors duration-300 group lift-tile">
                 <span className="h-display text-lg sm:text-xl lg:text-2xl font-extrabold tracking-wider group-hover:scale-110 transition-transform duration-300">
                   {b}
                 </span>

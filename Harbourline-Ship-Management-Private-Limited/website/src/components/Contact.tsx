@@ -51,19 +51,30 @@ export default function Contact() {
         'Message:',
         `${fd.get('message') || ''}`,
         '',
-        '— Sent from harbourline.com contact form',
+        '— Sent from the Harbourline Ship Management contact form',
       ].join('\n'),
     );
     // Opens the user's default mail client with everything pre-filled.
-    window.location.href = `mailto:info@harbourline.com?subject=${subject}&body=${body}`;
+    window.location.href = `mailto:harbourlineshipmanagement@gmail.com?subject=${subject}&body=${body}`;
     setSent(true);
     setTimeout(() => setSent(false), 5000);
     form.reset();
   };
 
   return (
-    <section id="contact" className="surface-2 text-white section-pad">
-      <div className="max-w-[1400px] mx-auto px-6 lg:px-10">
+    <section id="contact" className="surface-2 text-white section-pad relative overflow-hidden">
+      {/* Ambient decoration */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="glow-orb" style={{ left: '8%', top: '20%', width: 320, height: 320, background: 'rgba(1,142,222,0.35)' }} />
+        <div className="glow-orb" style={{ right: '6%', bottom: '12%', width: 260, height: 260, background: 'rgba(79,180,248,0.28)', animationDelay: '3s' }} />
+        <div className="absolute inset-0 opacity-[0.06]" style={{
+          backgroundImage: 'linear-gradient(rgba(255,255,255,0.45) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.45) 1px, transparent 1px)',
+          backgroundSize: '64px 64px',
+          maskImage: 'radial-gradient(ellipse at center, black 30%, transparent 70%)',
+          WebkitMaskImage: 'radial-gradient(ellipse at center, black 30%, transparent 70%)',
+        }} />
+      </div>
+      <div className="max-w-[1400px] mx-auto px-6 lg:px-10 relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 items-start">
           <div>
             <Reveal variant="up">
@@ -76,22 +87,45 @@ export default function Contact() {
             />
             <Reveal variant="up" delay={0.3}>
               <p className="text-mute-2 text-base sm:text-lg leading-relaxed mb-10 max-w-lg">
-                Get in touch with our marine experts for quotations, technical assistance, or to discuss
-                your spare-parts requirements. We respond within 24 hours.
+                Talk to our marine team for quotations, technical assistance or to discuss a vessel
+                requirement. Enquiries are typically answered within the same working day — and
+                emergency dispatch lines stay open around the clock.
               </p>
             </Reveal>
 
-            <ul className="space-y-6">
+            <ul className="space-y-6 mb-10">
               <ContactRow icon={<FaMapMarkerAlt />} label="Office" delay={0.4}>
-                R/s No. 78/6, Khata No. 125,<br />Opposite Shree Ram Oxygen,<br />Alang Road, Bhavnagar, Gujarat – 364150
+                240/A Sagar Complex, Jashonath Chowk,<br />
+                Near Moti Baug,<br />
+                Bhavnagar, Gujarat &mdash; 364001
               </ContactRow>
               <ContactRow icon={<FaPhoneAlt />} label="Phone" delay={0.55}>
-                <a href="tel:+919825645515" className="text-white hover:text-[color:var(--color-brand-light)]">+91 9825 645515</a>
+                <a href="tel:+919825645515" className="text-white hover:text-[color:var(--color-brand-light)]">+91 98256 45515</a>
               </ContactRow>
               <ContactRow icon={<FaEnvelope />} label="Email" delay={0.7}>
-                <a href="mailto:info@harbourline.com" className="text-white hover:text-[color:var(--color-brand-light)]">info@harbourline.com</a>
+                <a href="mailto:harbourlineshipmanagement@gmail.com" className="text-white hover:text-[color:var(--color-brand-light)] break-all">harbourlineshipmanagement@gmail.com</a>
               </ContactRow>
             </ul>
+
+            <Reveal variant="up" delay={0.8}>
+              <div className="border-t border-line pt-6">
+                <p className="text-mute text-xs tracking-[3px] uppercase mb-4">Leadership</p>
+                <ul className="space-y-3 text-sm">
+                  <li className="flex flex-wrap items-baseline gap-x-3">
+                    <span className="text-white font-semibold">Raees H. Saiyad</span>
+                    <span className="text-mute-2">Director (India)</span>
+                  </li>
+                  <li className="flex flex-wrap items-baseline gap-x-3">
+                    <span className="text-white font-semibold">Hasnain Velani</span>
+                    <span className="text-mute-2">Director (India)</span>
+                  </li>
+                  <li className="flex flex-wrap items-baseline gap-x-3">
+                    <span className="text-white font-semibold">Mayudin H. Saiyad</span>
+                    <span className="text-mute-2">Director (UAE)</span>
+                  </li>
+                </ul>
+              </div>
+            </Reveal>
           </div>
 
           <motion.form

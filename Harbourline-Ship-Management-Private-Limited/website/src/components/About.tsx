@@ -21,7 +21,7 @@ export default function About() {
           {/* Soft brand-blue tint over the scene */}
           <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-[rgba(1,142,222,0.18)] pointer-events-none" />
 
-          {/* Since 1998 floating badge */}
+          {/* Sourced-from-Alang badge */}
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             whileInView={{ opacity: 1, scale: 1 }}
@@ -29,9 +29,11 @@ export default function About() {
             transition={{ delay: 0.5, duration: 0.6 }}
             className="absolute bottom-6 left-6 sm:bottom-10 sm:left-10 z-10"
           >
-            <div className="float-y-2 w-28 h-28 sm:w-32 sm:h-32 rounded-full bg-[color:var(--color-brand)] text-white flex flex-col items-center justify-center shadow-2xl shadow-[color:var(--color-brand)]/40">
-              <span className="text-[10px] tracking-[2px] uppercase opacity-80">Since</span>
-              <span className="font-extrabold text-3xl sm:text-4xl">1998</span>
+            <div className="float-y-2 aura-brand w-28 h-28 sm:w-32 sm:h-32 rounded-full bg-[color:var(--color-brand)] text-white flex flex-col items-center justify-center shadow-2xl shadow-[color:var(--color-brand)]/40 text-center px-2 relative overflow-hidden">
+              <span className="text-[9px] tracking-[2px] uppercase opacity-80 relative z-10">Sourced From</span>
+              <span className="font-extrabold text-lg sm:text-xl leading-tight relative z-10">ALANG</span>
+              <span className="text-[9px] tracking-[2px] uppercase opacity-80 relative z-10">Ship Recycling Yard</span>
+              <span aria-hidden className="shimmer-overlay rounded-full" />
             </div>
           </motion.div>
 
@@ -44,31 +46,40 @@ export default function About() {
         <div className="surface flex items-center px-6 sm:px-10 lg:px-16 py-16 sm:py-20">
           <div className="max-w-xl">
             <Reveal variant="up">
-              <span className="section-eyebrow mb-5 block">Why Choose Us</span>
+              <span className="section-eyebrow mb-5 block">About The Company</span>
             </Reveal>
 
             <SplitText
               as="h2"
-              text="Trusted Marine Spares, Engineered for Performance & Reliability"
+              text="Trusted Marine Solutions, Built on Honest Inspection & Technical Depth"
               className="h-display text-3xl sm:text-4xl lg:text-5xl text-white mb-6"
               staggerMs={18}
             />
 
             <Reveal variant="up" delay={0.3}>
+              <p className="text-mute-2 text-base sm:text-lg leading-relaxed mb-5">
+                Welcome to Harbourline Ship Management — your trusted partner for ship management,
+                marine repair services and the worldwide supply of main engine, auxiliary engine and
+                automation spares. We trade in new components and carefully reconditioned units
+                sourced from certified suppliers and the renowned Alang ship recycling yard.
+              </p>
               <p className="text-mute-2 text-base sm:text-lg leading-relaxed mb-8">
-                We are a dedicated marine spares supplier committed to delivering reliable, high-quality
-                components that meet the demanding requirements of the marine industry. Our expertise spans
-                sourcing, quality control, logistics, and customer support, ensuring seamless operations
-                for vessels worldwide.
+                Every spare we dispatch is inspected by our marine engineers, and every repair we
+                undertake is signed off by people who have operated the same equipment at sea. The
+                result is reliable parts, honest condition reporting and dependable service that
+                keeps vessels operational, efficient and seaworthy.
               </p>
             </Reveal>
 
             {/* Stats row */}
             <Reveal variant="up" delay={0.5}>
-              <div className="grid grid-cols-3 gap-4 sm:gap-8 mb-10 border-y border-line py-6">
-                <Stat to={26} suffix="+" label="Years in Trade" />
-                <Stat to={500} suffix="+" label="Products" />
-                <Stat to={150} suffix="+" label="Global Clients" />
+              <div className="relative grid grid-cols-3 gap-4 sm:gap-8 mb-10 border-y border-line py-6">
+                {/* Top/bottom glow accents */}
+                <span aria-hidden className="absolute -top-px left-0 right-0 h-px bg-[linear-gradient(90deg,transparent,rgba(79,180,248,0.55),transparent)]" />
+                <span aria-hidden className="absolute -bottom-px left-0 right-0 h-px bg-[linear-gradient(90deg,transparent,rgba(79,180,248,0.55),transparent)]" />
+                <Stat to={600} suffix="+" label="Spares Inventory" />
+                <Stat to={40} suffix="+" label="Engine Brands Supported" />
+                <Stat to={24} suffix="/7" label="Emergency Dispatch" />
               </div>
             </Reveal>
 

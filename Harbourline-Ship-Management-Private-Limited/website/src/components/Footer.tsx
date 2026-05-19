@@ -57,9 +57,13 @@ export default function Footer() {
               </span>
             </Link>
             <h3 className="h-display text-lg sm:text-xl mb-4">Harbourline Ship Management</h3>
+            <p className="mb-2 uppercase tracking-[2px] text-[color:var(--color-brand-light)] text-[11px] font-semibold">
+              Navigating Excellence at Sea
+            </p>
             <p className="text-mute text-sm leading-relaxed mb-6">
-              We are happy to welcome you to Harbourline, one of the leading stockists, traders &
-              exporters of ship spares and machineries.
+              Ship management, marine repair services and worldwide supply of main engine,
+              auxiliary engine, automation and navigation spares — inspected before dispatch and
+              backed by a marine-engineer-led technical team.
             </p>
             <div className="flex gap-2">
               {socials.map((s) => (
@@ -130,7 +134,7 @@ export default function Footer() {
                 </span>
                 <div className="text-mute-2 text-sm leading-relaxed">
                   <p className="font-semibold text-fg">Harbourline Ship Management</p>
-                  <p>R/s No.78/6, Khata No.125,<br />Opposite Shree Ram Oxygen,<br />Alang Road, Bhavnagar, Gujarat – 364150</p>
+                  <p>240/A Sagar Complex,<br />Jashonath Chowk, Near Moti Baug,<br />Bhavnagar, Gujarat &mdash; 364001</p>
                 </div>
               </li>
               <li className="flex items-center gap-3">
@@ -138,15 +142,15 @@ export default function Footer() {
                   <FaPhoneAlt />
                 </span>
                 <a href="tel:+919825645515" className="text-mute-2 hover:text-[color:var(--color-brand-light)] text-sm">
-                  +91 9825 645515
+                  +91 98256 45515
                 </a>
               </li>
               <li className="flex items-center gap-3">
                 <span className="w-9 h-9 rounded-full bg-[color:var(--color-brand)]/10 border border-[color:var(--color-brand)]/30 flex items-center justify-center text-[color:var(--color-brand-light)] shrink-0">
                   <FaEnvelope />
                 </span>
-                <a href="mailto:info@harbourline.com" className="text-mute-2 hover:text-[color:var(--color-brand-light)] text-sm">
-                  info@harbourline.com
+                <a href="mailto:harbourlineshipmanagement@gmail.com" className="text-mute-2 hover:text-[color:var(--color-brand-light)] text-xs break-all">
+                  harbourlineshipmanagement@gmail.com
                 </a>
               </li>
             </ul>

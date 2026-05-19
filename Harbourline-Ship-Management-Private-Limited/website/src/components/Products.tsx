@@ -20,13 +20,13 @@ export default function Products() {
           </Reveal>
           <SplitText
             as="h2"
-            text="Marine Machinery & Spare Parts"
+            text="Marine Engine, Automation & Navigation Spares"
             className="h-display text-3xl sm:text-4xl lg:text-6xl max-w-3xl"
           />
           <Reveal variant="up" delay={0.3}>
             <p className="text-mute mt-5 max-w-md text-base">
-              Browse our extensive catalogue of brand-new and reconditioned marine spare parts — every
-              item QC-checked and ready for global shipment.
+              Main engine, auxiliary engine, automation, marine navigation and radar spares &mdash;
+              inspected in our Bhavnagar workshop and dispatched worldwide with full documentation.
             </p>
           </Reveal>
         </div>
@@ -39,7 +39,13 @@ export default function Products() {
             key={p.slug}
             whileHover={{ y: -8 }}
             transition={{ type: 'spring', stiffness: 200, damping: 20 }}
-            className="card-ring shrink-0 w-[85vw] sm:w-[440px] lg:w-[500px] rounded-2xl overflow-hidden surface-2 border border-line snap-center group"
+            className="card-ring spot-card shrink-0 w-[85vw] sm:w-[440px] lg:w-[500px] rounded-2xl overflow-hidden surface-2 border border-line snap-center group"
+            onMouseMove={(e) => {
+              const t = e.currentTarget as HTMLElement;
+              const r = t.getBoundingClientRect();
+              t.style.setProperty('--mx', `${e.clientX - r.left}px`);
+              t.style.setProperty('--my', `${e.clientY - r.top}px`);
+            }}
           >
             <Link to={`/products/${p.slug}`} className="block">
               <div className="img-overlay relative h-72 overflow-hidden">
