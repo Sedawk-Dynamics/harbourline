@@ -6,6 +6,7 @@ import CustomCursor from './components/CustomCursor';
 import CursorSpotlight from './components/CursorSpotlight';
 import ScrollProgress from './components/ScrollProgress';
 import MascotCaptain from './components/MascotCaptain';
+import ComingSoonPopup from './components/ComingSoonPopup';
 import ScrollToHash from './components/ScrollToHash';
 import HomeRoot from './pages/HomeRoot';
 
@@ -82,6 +83,7 @@ export default function App() {
         </Suspense>
 
         {!loading && <MascotCaptain />}
+        {!loading && <ComingSoonPopup />}
       </BrowserRouter>
     </ThemeProvider>
   );

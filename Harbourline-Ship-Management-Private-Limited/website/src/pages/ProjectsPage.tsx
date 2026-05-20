@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import PageShell from './PageShell';
 import PageHeader from './PageHeader';
 import SmartImage from '../components/SmartImage';
+import ComingSoon from '../components/ComingSoon';
 import { PROJECTS } from '../data/projects';
 import { IMG } from '../lib/images';
 
@@ -66,6 +67,52 @@ export default function ProjectsPage() {
               </div>
             </motion.article>
           ))}
+
+          {/* "More case studies coming soon" — bookends the project list with a
+              deliberate roadmap signal rather than ending on the last project. */}
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-80px' }}
+            transition={{ duration: 0.7 }}
+            className="relative rounded-3xl border border-dashed border-line overflow-hidden surface-2"
+          >
+            {/* Ambient glow + grid */}
+            <div aria-hidden className="absolute inset-0 pointer-events-none">
+              <div
+                className="glow-orb"
+                style={{ left: '10%', top: '20%', width: 320, height: 320, background: 'rgba(1,142,222,0.22)' }}
+              />
+              <div
+                className="absolute inset-0 opacity-[0.06]"
+                style={{
+                  backgroundImage:
+                    'linear-gradient(rgba(255,255,255,0.35) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.35) 1px, transparent 1px)',
+                  backgroundSize: '40px 40px',
+                  maskImage: 'radial-gradient(ellipse at center, black 30%, transparent 75%)',
+                  WebkitMaskImage: 'radial-gradient(ellipse at center, black 30%, transparent 75%)',
+                }}
+              />
+            </div>
+
+            <div className="relative z-10 px-6 sm:px-10 lg:px-14 py-12 sm:py-16 text-center flex flex-col items-center gap-5">
+              <ComingSoon variant="chip" tone="brand" label="Coming Soon" eta="More case studies" />
+              <h3 className="h-display text-2xl sm:text-3xl lg:text-4xl text-fg max-w-2xl">
+                The next chapter is already underway.
+              </h3>
+              <p className="text-mute-2 text-sm sm:text-base max-w-xl leading-relaxed">
+                We are documenting current engagements &mdash; emergency dispatch operations, dry-dock
+                spares packages and fleet-wide overhaul kits &mdash; for publication here over the coming
+                quarters. Reach out if you would like a private walk-through ahead of the public write-up.
+              </p>
+              <a
+                href="/#contact"
+                className="cta-ghost mt-2"
+              >
+                Talk to the team
+              </a>
+            </div>
+          </motion.div>
         </div>
       </section>
     </PageShell>

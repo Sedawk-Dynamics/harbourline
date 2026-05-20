@@ -3,8 +3,9 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { PRODUCTS } from '../data/products';
 import { SERVICES } from '../data/services';
+import ComingSoon from './ComingSoon';
 
-type NavItem = { label: string; href?: string; children?: { label: string; href: string }[] };
+type NavItem = { label: string; href?: string; children?: { label: string; href: string }[]; soon?: boolean };
 
 const navItems: NavItem[] = [
   { label: 'Home', href: '/' },
@@ -16,7 +17,7 @@ const navItems: NavItem[] = [
       ...PRODUCTS.map((p) => ({ label: p.title, href: `/products/${p.slug}` })),
     ],
   },
-  { label: 'New Arrival', href: '/products' },
+  { label: 'New Arrival', href: '/products', soon: true },
   {
     label: 'Services',
     children: [
@@ -180,12 +181,13 @@ export default function Navbar() {
                           ) : (
                             <button
                               onClick={() => go(item.href!)}
-                              className="group text-white font-heading text-3xl sm:text-5xl font-bold py-3 hover:text-[color:var(--color-brand)] transition-colors"
+                              className="group text-white font-heading text-3xl sm:text-5xl font-bold py-3 hover:text-[color:var(--color-brand)] transition-colors inline-flex items-center gap-3"
                             >
                               <span className="opacity-50 group-hover:opacity-100 text-sm align-top mr-3 font-mono">
                                 {String(i + 1).padStart(2, '0')}
                               </span>
                               {item.label}
+                              {item.soon && <ComingSoon variant="pill" tone="gold" />}
                             </button>
                           )}
                         </motion.li>

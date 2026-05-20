@@ -12,6 +12,7 @@ import { Suspense, lazy } from 'react';
 const MarqueeStrip = lazy(() => import('../components/Stats'));
 const Testimonials = lazy(() => import('../components/Projects'));
 const Brands       = lazy(() => import('../components/Brands'));
+const Upcoming     = lazy(() => import('../components/Upcoming'));
 const CTA          = lazy(() => import('../components/CTA'));
 const Contact      = lazy(() => import('../components/Contact'));
 const Footer       = lazy(() => import('../components/Footer'));
@@ -44,6 +45,11 @@ export default function HomeRoot() {
         <Suspense fallback={<Placeholder h="h-[40vh]" />}>
           <ErrorBoundary fallback={<Placeholder h="h-[40vh]" />}>
             <Brands />
+          </ErrorBoundary>
+        </Suspense>
+        <Suspense fallback={<Placeholder h="h-[60vh]" />}>
+          <ErrorBoundary fallback={<Placeholder h="h-[60vh]" />}>
+            <Upcoming />
           </ErrorBoundary>
         </Suspense>
         <Suspense fallback={<Placeholder h="h-[60vh]" />}>
