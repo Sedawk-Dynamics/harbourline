@@ -5,8 +5,16 @@ import SmartImage from '../components/SmartImage';
 import ComingSoon from '../components/ComingSoon';
 import { PROJECTS } from '../data/projects';
 import { IMG } from '../lib/images';
+import { usePageMeta } from '../lib/usePageMeta';
 
 export default function ProjectsPage() {
+  usePageMeta({
+    title: 'Projects & Case Studies — Marine Spares Delivered Worldwide',
+    description:
+      'Recent Harbourline projects — emergency spare delivery, dry-dock support and overhaul kit dispatch for global shipping fleets.',
+    path: '/projects',
+  });
+
   return (
     <PageShell>
       <PageHeader

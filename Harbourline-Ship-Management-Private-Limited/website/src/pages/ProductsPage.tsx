@@ -6,8 +6,16 @@ import PageHeader from './PageHeader';
 import SmartImage from '../components/SmartImage';
 import { PRODUCTS } from '../data/products';
 import { IMG } from '../lib/images';
+import { usePageMeta } from '../lib/usePageMeta';
 
 export default function ProductsPage() {
+  usePageMeta({
+    title: 'Marine Engine, Automation & Navigation Spares',
+    description:
+      'Browse Harbourline Ship Management products — main engine and auxiliary engine spares, automation, marine navigation and radar spares. Inspected components dispatched worldwide.',
+    path: '/products',
+  });
+
   return (
     <PageShell>
       <PageHeader

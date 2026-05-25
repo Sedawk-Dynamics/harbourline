@@ -243,6 +243,23 @@ html.light .dark-zone * { color: #fff; }
 html.light .dark-zone .text-mute    { color: var(--color-mute); }
 html.light .dark-zone .text-mute-2  { color: var(--color-mute-2); }
 
+/* The blanket `.dark-zone *` rule above forces every descendant to white
+   text in light mode — that accidentally hides intentional dark text on
+   white-background pills/buttons (e.g. "Request a Quote", "Explore More").
+   Restore the dark labels so they stay readable while the surrounding
+   section keeps its dark look. The trailing ` *` variants are required
+   because MagneticButton wraps its label in an inner <span>, and the
+   universal `.dark-zone *` rule sets that span's color directly — beating
+   plain CSS inheritance from the button. */
+html.light .dark-zone .btn-square.is-light,
+html.light .dark-zone .btn-square.is-light *,
+html.light .dark-zone .pill,
+html.light .dark-zone .pill * { color: #0B0F14; }
+html.light .dark-zone .btn-square.is-light:hover,
+html.light .dark-zone .btn-square.is-light:hover *,
+html.light .dark-zone .pill:hover,
+html.light .dark-zone .pill:hover * { color: #fff; }
+
 /* Card-image overlays inside surface sections must stay light-on-dark */
 html.light .surface .img-overlay,
 html.light .surface-2 .img-overlay,
@@ -258,6 +275,15 @@ html.light .surface-3 .img-overlay * { color: #fff; }
   -webkit-backdrop-filter: blur(14px);
   border: 1px solid var(--glass-border);
 }
+
+/* In light mode the .glass surface becomes white-ish, so hard-coded
+   `text-white` inside (used by the Contact form inputs/labels) becomes
+   invisible. Re-theme the form fields against the current foreground. */
+html.light .glass input,
+html.light .glass textarea,
+html.light .glass select { color: var(--fg); }
+html.light .glass input::placeholder,
+html.light .glass textarea::placeholder { color: var(--mute); }
 
 /* Bg grid uses themed stroke */
 .bg-grid {
@@ -275,6 +301,15 @@ section.bg-\[color\:var\(--color-brand\)\] .text-white,
 html.light nav.sticky.top-0.bg-\[rgba\(11\,15\,20\,0\.85\)\] {
   background: rgba(255,255,255,0.85) !important;
 }
+/* When the navbar background flips to white in light mode, we must also
+   flip the navbar text back to dark — otherwise the JSX `text-white` on
+   the scrolled state leaves us with white-on-white. The non-scrolled
+   navbar still sits over the dark hero (which is .dark-zone), so its
+   text-white is correct in both themes and we deliberately don't touch
+   it here. */
+html.light nav.sticky.top-0.bg-\[rgba\(11\,15\,20\,0\.85\)\],
+html.light nav.sticky.top-0.bg-\[rgba\(11\,15\,20\,0\.85\)\] * { color: var(--fg-strong); }
+html.light nav.sticky.top-0.bg-\[rgba\(11\,15\,20\,0\.85\)\] .text-mute { color: var(--mute); }
 
 /* Hide-on-scroll header background under light mode */
 html.light .surface[class*="rgba(11"] { background: rgba(255,255,255,0.85); }

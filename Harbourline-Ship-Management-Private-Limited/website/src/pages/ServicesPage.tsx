@@ -7,8 +7,16 @@ import ServiceArt from '../components/ServiceArt';
 import SmartImage from '../components/SmartImage';
 import { SERVICES } from '../data/services';
 import { IMG } from '../lib/images';
+import { usePageMeta } from '../lib/usePageMeta';
 
 export default function ServicesPage() {
+  usePageMeta({
+    title: 'Marine Services — Ship Management, Repairs & Worldwide Dispatch',
+    description:
+      'Harbourline services: ship management, marine repair works, spares supply, inspection & reconditioning, worldwide dispatch and port-side support — one accountable point of contact.',
+    path: '/services',
+  });
+
   return (
     <PageShell>
       <PageHeader

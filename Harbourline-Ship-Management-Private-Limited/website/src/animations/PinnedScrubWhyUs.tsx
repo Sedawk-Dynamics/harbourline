@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import type { ReactNode } from 'react';
 import { gsap, ScrollTrigger } from './useGsapContext';
 import { useReducedMotion } from './useReducedMotion';
@@ -18,18 +18,36 @@ type Props = {
   cards: Card[];
 };
 
+// GSAP pin only runs at this width and above. Below this, render the stacked
+// fallback so the content stays visible (otherwise the pw-step cards remain
+// at opacity:0 forever on tablets/phones).
+const PIN_MIN_WIDTH = '(min-width: 1024px)';
+
 export default function PinnedScrubWhyUs({ image, watermark = 'HARBOUR', intro, cards }: Props) {
   const scope = useRef<HTMLDivElement>(null);
   const reduced = useReducedMotion();
+  const [pinEligible, setPinEligible] = useState<boolean>(() =>
+    typeof window !== 'undefined' && window.matchMedia(PIN_MIN_WIDTH).matches,
+  );
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const mq = window.matchMedia(PIN_MIN_WIDTH);
+    setPinEligible(mq.matches);
+    const handler = (e: MediaQueryListEvent) => setPinEligible(e.matches);
+    mq.addEventListener('change', handler);
+    return () => mq.removeEventListener('change', handler);
+  }, []);
 
   useEffect(() => {
     if (!scope.current) return;
     if (reduced) return;
+    if (!pinEligible) return;
 
     const ctx = gsap.context(() => {
       const mm = gsap.matchMedia();
 
-      mm.add('(min-width: 992px)', () => {
+      mm.add(PIN_MIN_WIDTH, () => {
         const cardEls = gsap.utils.toArray<HTMLElement>('.pw-step');
         const total = cardEls.length;
 
@@ -76,10 +94,13 @@ export default function PinnedScrubWhyUs({ image, watermark = 'HARBOUR', intro, 
       ctx.revert();
       ScrollTrigger.getAll().forEach((t) => t.kill());
     };
-  }, [reduced]);
+  }, [reduced, pinEligible]);
 
-  // Mobile / reduced-motion fallback: vertical stack
-  if (reduced) {
+  // Mobile / tablet / reduced-motion fallback: vertical stack so that every
+  // card is rendered with normal opacity. Without this, viewports below the
+  // GSAP pin threshold leave the absolutely-positioned cards stuck at
+  // opacity:0 (set inline for the pin animation) and the user sees nothing.
+  if (reduced || !pinEligible) {
     return (
       <section id="why-us" className="surface text-fg">
         <div className="px-6 lg:px-10 py-16 max-w-[1400px] mx-auto grid lg:grid-cols-2 gap-12 items-center">

@@ -237,7 +237,9 @@ export default function Preloader({ isLoading }: { isLoading: boolean }) {
               <img
                 src="/logo.png"
                 alt="Harbourline Ship Management"
-                className="relative z-10 w-44 h-44 sm:w-56 sm:h-56 object-contain"
+                /* Height-based sizing so the wide HSM logo keeps its aspect
+                   ratio. The wrapping card auto-grows to fit. */
+                className="relative z-10 h-32 sm:h-40 w-auto object-contain"
               />
               {/* Shimmer sheen — sweeps once after the logo settles */}
               {!reduced && (

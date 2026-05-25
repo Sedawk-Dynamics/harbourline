@@ -12,8 +12,13 @@ export default function About() {
   return (
     <section id="about" ref={ref} className="relative surface text-white">
       <div className="grid lg:grid-cols-2 min-h-[80vh]">
-        {/* Image side — custom animated SVG scene (never depends on an external image) */}
-        <div className="img-overlay relative h-[420px] sm:h-[520px] lg:h-auto overflow-hidden">
+        {/* Image side — custom animated SVG scene (never depends on an external image).
+            `lg:min-h-[80vh]` is the bulletproof part: every child below is
+            position: absolute, so the auto-height collapses to 0 on desktop
+            and the grid's `align-self: stretch` isn't reliable enough across
+            browsers to save it. With the explicit floor the SVG always has
+            real vertical space to paint into. */}
+        <div className="img-overlay relative h-[420px] sm:h-[520px] lg:h-auto lg:min-h-[80vh] overflow-hidden">
           <RevealMask direction="h" className="absolute inset-0">
             <AnimatedOceanScene />
           </RevealMask>

@@ -1,0 +1,26 @@
+{
+  "name": "Harbourline Ship Management",
+  "short_name": "Harbourline",
+  "description": "Ship management, marine repairs and worldwide supply of marine engine, automation, navigation and radar spares.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#0B0F14",
+  "theme_color": "#018EDE",
+  "lang": "en",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/logo.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

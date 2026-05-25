@@ -8,11 +8,14 @@ import Reveal from '../animations/Reveal';
 import SmartImage from './SmartImage';
 import { IMG } from '../lib/images';
 import { useReducedMotion } from '../animations/useReducedMotion';
+// Imported through Vite so the URL gets a content-hash. Swap this file and
+// the next build emits a fresh URL — browsers/CDNs can never serve a stale
+// copy. (When the file lived in /public the path stayed `/harbourline-hero.mp4`
+// forever, so replacing it had no visible effect until a hard refresh.)
+import LOCAL_VIDEO from '../assets/harbourline-hero.mp4';
 
 // High-quality "bulk cargo ship at sea" still — used as poster AND visible fallback
 const POSTER = IMG.heroBulk;
-// Local mp4 (already in /public). Replace this file to swap the hero clip.
-const LOCAL_VIDEO = '/harbourline-hero.mp4';
 
 export default function Hero() {
   const ref = useRef<HTMLElement>(null);
@@ -68,8 +71,18 @@ export default function Hero() {
       ref={ref}
       className="dark-zone relative -mt-[88px] pt-[88px] min-h-[100svh] overflow-hidden"
     >
-      {/* Background layer — video of a fully-loaded bulk cargo ship at sea */}
-      <motion.div className="absolute inset-0 z-0" style={{ y: bgY }}>
+      {/* Background layer — video of a fully-loaded bulk cargo ship at sea.
+          The wrapper carries a deep-ocean gradient so the hero never falls back
+          to flat black when both the poster image (CDN) and the video fail to
+          load — without this, an offline/blocked client sees an empty section. */}
+      <motion.div
+        className="absolute inset-0 z-0"
+        style={{
+          y: bgY,
+          background:
+            'radial-gradient(ellipse at 30% 35%, #0E5C8C 0%, #07385A 45%, #04253D 80%, #020E16 100%)',
+        }}
+      >
         {/* Poster image: always renders. Sits beneath the video so when the
             video is loading / hidden / errored, the ship still shows. */}
         <SmartImage

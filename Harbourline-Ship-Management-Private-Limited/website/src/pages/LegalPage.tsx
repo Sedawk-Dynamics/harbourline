@@ -1,6 +1,7 @@
 import PageShell from './PageShell';
 import PageHeader from './PageHeader';
 import { IMG } from '../lib/images';
+import { usePageMeta } from '../lib/usePageMeta';
 
 type Section = { heading: string; body: string[] };
 type Props = {
@@ -8,9 +9,12 @@ type Props = {
   intro: string;
   sections: Section[];
   crumbLabel: string;
+  path: string;
 };
 
-export default function LegalPage({ title, intro, sections, crumbLabel }: Props) {
+export default function LegalPage({ title, intro, sections, crumbLabel, path }: Props) {
+  usePageMeta({ title, description: intro, path });
+
   return (
     <PageShell>
       <PageHeader
@@ -57,6 +61,7 @@ export function PrivacyPage() {
     <LegalPage
       title="Privacy Policy"
       crumbLabel="Privacy Policy"
+      path="/privacy"
       intro="At Harbourline Ship Management Pvt. Ltd. we respect your privacy and are committed to protecting your personal data. This policy explains what information we collect when you use our website and how we handle it."
       sections={[
         {
@@ -109,6 +114,7 @@ export function TermsPage() {
     <LegalPage
       title="Terms of Service"
       crumbLabel="Terms of Service"
+      path="/terms"
       intro="These terms govern your use of the Harbourline Ship Management website and our quotation/supply services. By using the site or engaging with us commercially you agree to these terms."
       sections={[
         {

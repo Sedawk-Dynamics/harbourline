@@ -80,15 +80,22 @@ export default function Navbar() {
         animate={{ y: hidden ? -100 : 0 }}
         transition={{ duration: 0.35, ease: [0.2, 0.7, 0.3, 1] }}
         className={`sticky top-0 z-50 transition-colors duration-300 ${
-          scrolled ? 'backdrop-blur-xl bg-[rgba(11,15,20,0.85)] border-b border-line' : 'bg-transparent'
+          scrolled
+            ? 'backdrop-blur-xl bg-[rgba(11,15,20,0.85)] border-b border-line text-white'
+            : 'bg-transparent text-white'
         }`}
+        /* When scrolled, the navbar bg flips to white in light mode (via the
+           CSS override in index.css). We invert the text color in that
+           specific case so it stays readable on the light background. */
       >
         <div className="max-w-[1400px] mx-auto px-6 py-4 flex items-center justify-between">
           <a href="/" onClick={(e) => { e.preventDefault(); go('/'); }} className="flex items-center gap-3 group">
             <img
               src="/logo.png"
               alt="Harbourline Ship Management"
-              className="w-12 h-12 object-contain drop-shadow-[0_0_18px_rgba(1,142,222,0.35)]"
+              /* Height-based sizing so the wide HSM logo keeps its aspect
+                 ratio instead of being squashed into a square. */
+              className="h-10 sm:h-12 w-auto object-contain drop-shadow-[0_0_18px_rgba(1,142,222,0.35)]"
             />
             <div className="flex flex-col leading-tight">
               <span className="font-heading text-lg sm:text-xl font-extrabold tracking-tight">

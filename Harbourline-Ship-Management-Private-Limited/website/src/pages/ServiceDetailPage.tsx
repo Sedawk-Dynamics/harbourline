@@ -7,10 +7,17 @@ import ServiceArt from '../components/ServiceArt';
 import SmartImage from '../components/SmartImage';
 import Reveal from '../animations/Reveal';
 import { findService, SERVICES } from '../data/services';
+import { usePageMeta } from '../lib/usePageMeta';
 
 export default function ServiceDetailPage() {
   const { slug } = useParams<{ slug: string }>();
   const service = slug ? findService(slug) : undefined;
+
+  usePageMeta({
+    title: service ? service.title : 'Service',
+    description: service?.short,
+    path: service ? `/services/${service.slug}` : '/services',
+  });
 
   if (!service) return <Navigate to="/services" replace />;
 

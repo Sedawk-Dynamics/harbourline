@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+Disallow: /assets/
+
+# Sitemap
+Sitemap: https://harbourline.ae/sitemap.xml
+
+# Crawl-delay for bots that respect it
+Crawl-delay: 1

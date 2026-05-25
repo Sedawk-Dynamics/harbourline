@@ -6,10 +6,17 @@ import PageHeader from './PageHeader';
 import SmartImage from '../components/SmartImage';
 import Reveal from '../animations/Reveal';
 import { findProduct, PRODUCTS } from '../data/products';
+import { usePageMeta } from '../lib/usePageMeta';
 
 export default function ProductDetailPage() {
   const { slug } = useParams<{ slug: string }>();
   const product = slug ? findProduct(slug) : undefined;
+
+  usePageMeta({
+    title: product ? product.title : 'Product',
+    description: product?.short,
+    path: product ? `/products/${product.slug}` : '/products',
+  });
 
   if (!product) return <Navigate to="/products" replace />;
 

@@ -136,13 +136,17 @@ export default function ComingSoonPopup({
               />
             )}
 
-            {/* Close button */}
+            {/* Close button — z-20 so it sits above the content layer (which
+                also uses z-10) and actually receives the click. At equal
+                z-index the later-in-DOM content would otherwise cover the
+                button's top-right hit area and swallow the click. */}
             <button
+              type="button"
               aria-label="Dismiss"
               onClick={close}
-              className="absolute top-4 right-4 z-10 w-9 h-9 rounded-full border border-white/15 bg-white/5 hover:bg-white/15 text-white flex items-center justify-center transition-colors"
+              className="absolute top-4 right-4 z-20 w-9 h-9 rounded-full border border-white/15 bg-white/5 hover:bg-white/15 text-white flex items-center justify-center transition-colors"
             >
-              <FaXmark className="text-sm" />
+              <FaXmark className="text-sm pointer-events-none" />
             </button>
 
             {/* Diagonal sheen — runs once just after open */}
